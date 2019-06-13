@@ -1,0 +1,9 @@
+.Xil
+*.log
+*.jou
+
+_*
+sdk
+
+*.lnk
+*.vscode
