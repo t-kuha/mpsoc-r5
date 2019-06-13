@@ -16,9 +16,15 @@ $ vivado -mode batch -source create_vivado_project.tcl
 
 - SD card image
 
+```shell-session
+xsct% source create_boot_bin.tcl
+```
+
 ***
 
 ## Run
+
+- Copy BOOT.bin into micro SD card & boot the board
 
 ***
 
