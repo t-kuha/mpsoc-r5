@@ -38,7 +38,7 @@ configbsp -bsp hello_world_bsp stdout "psu_uart_1"
 updatemss -mss ${XSDK_DIR}/hello_world_bsp/system.mss
 regenbsp -bsp hello_world_bsp
 
-# Replace helloworld.c with led_blink.c
+# Replace helloworld.c with the new one
 exec rm ${XSDK_DIR}/hello_world/${SRC_DIR}/helloworld.c
 exec cp ${SRC_DIR}/helloworld.c ${XSDK_DIR}/hello_world/${SRC_DIR}/helloworld.c
 
