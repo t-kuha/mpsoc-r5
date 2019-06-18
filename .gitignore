@@ -12,3 +12,4 @@ tf_micro/tensorflow
 *.url
 *.tar.gz
 *.zip
+*.hdf
