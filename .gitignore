@@ -5,5 +5,10 @@
 _*
 sdk
 
+tf_micro/tensorflow
+
 *.lnk
 *.vscode
+*.url
+*.tar.gz
+*.zip
