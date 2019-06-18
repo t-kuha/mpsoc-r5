@@ -1,4 +1,9 @@
 # mpsoc-r5
-ZYnq Ultrascale+ MPSoC RPU examples
 
-- hello-world: "Print Hello World" from RPU
+Zynq Ultrascale+ MPSoC RPU examples
+
+***
+
+## Contents
+
+- hello-world: Output "Hello World" to console
