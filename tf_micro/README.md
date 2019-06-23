@@ -76,7 +76,7 @@ test
 
 ```shell-session
 $ cd ..
-xsct% exec bootgen -arch zynqmp -image src/boot_bin_micro_features_fft_test.bif -w -o BOOT.bin
+% ./create_boot_bin.sh
 ```
 
 ***
