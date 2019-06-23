@@ -20,6 +20,8 @@ $ vivado -mode batch -source create_vivado_project.tcl
 xsct% source create_bsp.tcl
 ```
 
+- Increase stack size in _tf_micro/sdk/tf/src/lscript.ld_ to 0x10000
+
 ***
 
 ## Get TensorFlow source
@@ -84,6 +86,18 @@ $ cd ..
 ## Run
 
 - Copy BOOT.bin into a micro SD card
+
+- Example output (command_responder_test):
+
+```shell-session
+Xilinx Zynq MP First Stage Boot Loader
+Release 2018.3   Jun 22 2019  -  19:03:28
+PMU-FW is not running, certain applications may not be supported.
+Testing TestCallability
+Heard foo (0) @0ms
+1/1 tests passed
+~~~ALL TESTS PASSED~~~
+```
 
 ***
 
