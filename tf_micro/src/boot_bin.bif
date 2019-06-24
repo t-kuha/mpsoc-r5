@@ -3,5 +3,5 @@ the_ROM_image:
 {
 	[fsbl_config] r5_single
 	[bootloader] sdk/fsbl/Release/fsbl.elf
-	[destination_cpu = r5-0] tensorflow/tensorflow/lite/experimental/micro/tools/make/gen/zynq_x86_32/bin/micro_features_fft_test
+	[destination_cpu = r5-0] tensorflow/tensorflow/lite/experimental/micro/tools/make/gen/zynq_x86_64/bin/softmax_test.elf
 }

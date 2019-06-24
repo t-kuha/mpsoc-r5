@@ -20,6 +20,8 @@ $ vivado -mode batch -source create_vivado_project.tcl
 xsct% source create_bsp.tcl
 ```
 
+- Increase stack size in _tf_micro/sdk/tf/src/lscript.ld_ to 0x10000
+
 ***
 
 ## Get TensorFlow source
@@ -28,13 +30,15 @@ xsct% source create_bsp.tcl
 
 ```shell-session
 $ git clone https://github.com/tensorflow/tensorflow.git
+$ cd tensorflow
+$ git checkout f9dd464df8e2b51b1d9020f2d8799ca3ae4f8ef4
 ```
 
 ***
 
 ## Build
 
-- Edit Makefile
+- Edit Makefile (tensorflow/tensorflow/lite/experimental/micro/tools/make/Makefile)
 
   - Before
 
@@ -51,16 +55,14 @@ $ git clone https://github.com/tensorflow/tensorflow.git
 - Make static library
 
 ```shell-session
-$ cd tensorflow
-
 $ make -j$(nproc) -f tensorflow/lite/experimental/micro/tools/make/Makefile \
-TARGET=zynq TAGS=arm microlite \
+TARGET=zynq TAGS=arm \
 TARGET_TOOLCHAIN_PREFIX=armr5-none-eabi- \
-CXXFLAGS="-O3 -DNDEBUG -DARMR5 -Wall -fmessage-length=0 -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16" \
+CXXFLAGS="-O3 -DNDEBUG -DTF_LITE_STATIC_MEMORY -DARMR5 -Wall -fmessage-length=0 -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16" \
 microlite
 ```
 
-- Make test application
+- Make test applications
 
 ```shell-session
 make -j$(nproc) -f tensorflow/lite/experimental/micro/tools/make/Makefile \
@@ -76,7 +78,7 @@ test
 
 ```shell-session
 $ cd ..
-xsct% exec bootgen -arch zynqmp -image src/boot_bin_micro_features_fft_test.bif -w -o BOOT.bin
+% ./create_boot_bin.sh
 ```
 
 ***
@@ -84,6 +86,18 @@ xsct% exec bootgen -arch zynqmp -image src/boot_bin_micro_features_fft_test.bif 
 ## Run
 
 - Copy BOOT.bin into a micro SD card
+
+- Example output (command_responder_test):
+
+```shell-session
+Xilinx Zynq MP First Stage Boot Loader
+Release 2018.3   Jun 22 2019  -  19:03:28
+PMU-FW is not running, certain applications may not be supported.
+Testing TestCallability
+Heard foo (0) @0ms
+1/1 tests passed
+~~~ALL TESTS PASSED~~~
+```
 
 ***
 

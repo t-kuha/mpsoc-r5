@@ -38,15 +38,8 @@ configbsp -bsp tf_bsp stdout "psu_uart_1"
 updatemss -mss ${XSDK_DIR}/tf_bsp/system.mss
 regenbsp -bsp tf_bsp
 
-# Replace helloworld.c with led_blink.c
-# exec rm ${XSDK_DIR}/hello_world/${SRC_DIR}/helloworld.c
-# exec cp ${SRC_DIR}/helloworld.c ${XSDK_DIR}/hello_world/${SRC_DIR}/helloworld.c
-
 # Build in release mode
 configapp -app fsbl build-config release
 configapp -app tf build-config release
 
 projects -build
-
-# Generate BOOT.bin
-# exec bootgen -arch zynqmp -image ${SRC_DIR}/boot_bin.bif -w -o BOOT.bin
