@@ -36,7 +36,7 @@ $ git checkout f9dd464df8e2b51b1d9020f2d8799ca3ae4f8ef4
 
 ***
 
-## Build
+## Build tests
 
 - Edit Makefile (tensorflow/tensorflow/lite/experimental/micro/tools/make/Makefile)
 
@@ -83,7 +83,7 @@ $ cd ..
 
 ***
 
-## Run
+## Run tests
 
 - Copy BOOT.bin into a micro SD card
 
@@ -97,6 +97,64 @@ Testing TestCallability
 Heard foo (0) @0ms
 1/1 tests passed
 ~~~ALL TESTS PASSED~~~
+```
+
+***
+
+## MNIST application
+
+- Build
+
+```shell-session
+$ mkdir _app_mnist
+
+# Compile
+$ armr5-none-eabi-g++ \
+-c -O3 -DNDEBUG -DTF_LITE_STATIC_MEMORY -DARMR5 \
+-Wall -fmessage-length=0 -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16 \
+-Isrc/app_mnist \
+-Itensorflow \
+-Itensorflow/tensorflow/lite/experimental/micro/tools/make/downloads/ \
+-Itensorflow/tensorflow/lite/experimental/micro/tools/make/downloads/gemmlowp \
+-Itensorflow/tensorflow/lite/experimental/micro/tools/make/downloads/flatbuffers/include \
+src/app_mnist/main.cpp -o _app_mnist/main.o
+
+# Link
+armr5-none-eabi-g++ \
+-Wl,-T -Wl,sdk/tf/src/lscript.ld \
+-o _app_mnist/tf_micro.elf \
+_app_mnist/main.o \
+tensorflow/tensorflow/lite/experimental/micro/tools/make/gen/zynq_x86_64/lib/libtensorflow-microlite.a \
+-lm -Wl,--start-group,-lgcc,-lc,-lstdc++,--end-group \
+sdk/tf_bsp/psu_cortexr5_0/lib/libxil.a \
+-mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16
+```
+
+- Create BOOT.bin
+
+```shell-session
+xsct% exec bootgen -arch zynqmp -image src/boot_bin_mnist_app.bif -w -o BOOT.bin
+```
+
+- Run
+
+```shell-session
+Xilinx Zynq MP First Stage Boot Loader
+Release 2018.3   Jun 21 2019  -  20:14:26
+PMU-FW is not running, certain applications may not be supported.
+..... TensorFlow Lite for Micro Controllers .....
+TF version: 1.13.1
+Score: 1.11092e-11
+Score: 8.0648e-15
+Score: 1.88969e-09
+Score: 3.409e-08
+Score: 1.40475e-14
+Score: 1.13911e-10
+Score: 1.89212e-22
+Score: 1
+Score: 6.73126e-12
+Score: 4.93872e-08
+Output: 7
 ```
 
 ***
