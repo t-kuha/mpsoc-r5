@@ -6,4 +6,6 @@ Zynq Ultrascale+ MPSoC RPU examples
 
 ## Contents
 
-- hello-world: Output "Hello World" to console
+- __hello-world__: Output "Hello World" to console
+
+- __tf_micro__: TensorFlow Lite for Microcontrolles on RPU (Cortex-R5)
