@@ -8,7 +8,7 @@
 # Reference: UG1208
 # 
 
-set XSDK_DIR    sdk
+set XSDK_DIR    _sdk
 set PRJ_NAME    u96_tf
 set SRC_DIR     src
 

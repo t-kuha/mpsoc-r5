@@ -3,7 +3,7 @@ set PRJ_DIR     _vivado
 set PRJ_NAME    u96_tf
 set BD_NAME     design_1
 set SRC_DIR     src
-set XSDK_DIR    sdk
+set XSDK_DIR    _sdk
 set NUM_JOBS    4
 
 

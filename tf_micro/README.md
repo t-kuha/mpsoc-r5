@@ -20,13 +20,13 @@ $ vivado -mode batch -source create_vivado_project.tcl
 xsct% source create_bsp.tcl
 ```
 
-- Increase stack size in _tf_micro/sdk/tf/src/lscript.ld_ to 0x10000
+- Increase stack size in _tf_micro/sdk/tf/src/lscript.ld_ to 0x40000
 
 ***
 
 ## Get TensorFlow source
 
-- commit: f9dd464df8e2b51b1d9020f2d8799ca3ae4f8ef4
+- We will use commit _f9dd464df8e2b51b1d9020f2d8799ca3ae4f8ef4_
 
 ```shell-session
 $ git clone https://github.com/tensorflow/tensorflow.git
@@ -36,7 +36,9 @@ $ git checkout f9dd464df8e2b51b1d9020f2d8799ca3ae4f8ef4
 
 ***
 
-## Build tests
+## TF micro tests
+
+### Build
 
 - Edit Makefile (tensorflow/tensorflow/lite/experimental/micro/tools/make/Makefile)
 
@@ -59,6 +61,7 @@ $ make -j$(nproc) -f tensorflow/lite/experimental/micro/tools/make/Makefile \
 TARGET=zynq TAGS=arm \
 TARGET_TOOLCHAIN_PREFIX=armr5-none-eabi- \
 CXXFLAGS="-O3 -DNDEBUG -DTF_LITE_STATIC_MEMORY -DARMR5 -Wall -fmessage-length=0 -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16" \
+CCFLAGS="-O3 -DNDEBUG -g -DTF_LITE_STATIC_MEMORY -DARMR5 -Wall -fmessage-length=0 -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16" \
 microlite
 ```
 
@@ -81,9 +84,7 @@ $ cd ..
 % ./create_boot_bin.sh
 ```
 
-***
-
-## Run tests
+### Run tests
 
 - Copy BOOT.bin into a micro SD card
 
@@ -103,7 +104,7 @@ Heard foo (0) @0ms
 
 ## MNIST application
 
-- Build
+### Build
 
 ```shell-session
 $ mkdir _app_mnist
@@ -121,12 +122,12 @@ src/app_mnist/main.cpp -o _app_mnist/main.o
 
 # Link
 armr5-none-eabi-g++ \
--Wl,-T -Wl,sdk/tf/src/lscript.ld \
+-Wl,-T -Wl,_sdk/tf/src/lscript.ld \
 -o _app_mnist/tf_micro.elf \
 _app_mnist/main.o \
 tensorflow/tensorflow/lite/experimental/micro/tools/make/gen/zynq_x86_64/lib/libtensorflow-microlite.a \
 -lm -Wl,--start-group,-lgcc,-lc,-lstdc++,--end-group \
-sdk/tf_bsp/psu_cortexr5_0/lib/libxil.a \
+_sdk/tf_bsp/psu_cortexr5_0/lib/libxil.a \
 -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16
 ```
 
@@ -136,7 +137,9 @@ sdk/tf_bsp/psu_cortexr5_0/lib/libxil.a \
 xsct% exec bootgen -arch zynqmp -image src/boot_bin_mnist_app.bif -w -o BOOT.bin
 ```
 
-- Run
+### Run
+
+- Output:
 
 ```shell-session
 Xilinx Zynq MP First Stage Boot Loader

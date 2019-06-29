@@ -2,6 +2,6 @@
 the_ROM_image:
 {
 	[fsbl_config] r5_single
-	[bootloader] sdk/fsbl/Release/fsbl.elf
+	[bootloader] _sdk/fsbl/Release/fsbl.elf
 	[destination_cpu = r5-0] _app_mnist/tf_micro.elf
 }
