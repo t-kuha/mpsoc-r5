@@ -1,6 +1,6 @@
 # TensorFlow for micro controllers on RPU
 
-- OS: Ubuntu 16:04
+- OS: Ubuntu 16.04
 - Toolchain: 2018.3
 - Board: Ultra96 (v1)
 
