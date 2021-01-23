@@ -1,6 +1,6 @@
 # Hello World
 
-- Make sure to build platform by following thie [README.md](../platform/README.md)
+- Make sure to build platform by following this [README.md](../platform/README.md)
 
 ***
 
