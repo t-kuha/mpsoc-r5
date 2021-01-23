@@ -1,9 +1,15 @@
-# mpsoc-r5
+# mpsoc-r5: Zynq Ultrascale+ MPSoC RPU examples
 
-Zynq Ultrascale+ MPSoC RPU examples
+- Board: AVNET Ultra96v2
+- Toolchain: 2020.2
+- OS: Ubuntu 20.04
 
 ***
 
 ## Contents
 
-- hello-world: Output "Hello World" to console
+- __platform__: Vitis platform
+
+- __hello-world__: Output "Hello World" to console
+
+- __tf_micro__: TensorFlow Lite for Microcontrollers on RPU (Cortex-R5)
