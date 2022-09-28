@@ -6,6 +6,7 @@
 _*
 
 tf_micro/tensorflow
+tf_micro/tflite-micro
 
 *.lnk
 *.vscode
