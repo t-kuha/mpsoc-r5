@@ -1,0 +1,6 @@
+/*u96v2_r5*/
+the_ROM_image:
+{
+ [bootloader, destination_cpu=r5-0] <u96v2_r5/boot/fsbl.elf>
+ [destination_cpu=r5-0] <elf,psu_cortexr5_0>
+}

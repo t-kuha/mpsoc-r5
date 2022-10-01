@@ -1,0 +1,68 @@
+/*
+ * Copyright (c) 2020, Antmicro
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/dts-v1/;
+#include <arm/xilinx/zynqmp_rpu.dtsi>
+#include <zephyr/dt-bindings/gpio/gpio.h>
+
+/ {
+	model = "Avnet Ultra96 V2";
+	compatible = "xlnx,zynqmp";
+
+	chosen {
+		zephyr,console = &uart1;
+		zephyr,sram = &sram0;
+		zephyr,flash = &flash0;
+		zephyr,shell-uart = &uart1;
+	};
+
+	fpga0: fpga {
+		status = "okay";
+		compatible = "xlnx,fpga";
+	};
+
+	// leds {
+	// 	compatible = "gpio-leds";
+	// 	led_0: led_0 {
+	// 		gpios = <&psgpio_bank0 17 GPIO_ACTIVE_HIGH>;
+	// 		label = "USR0 LED";
+	// 	};
+	// 	led_1: led_1 {
+	// 		gpios = <&psgpio_bank0 18 GPIO_ACTIVE_HIGH>;
+	// 		label = "USR1 LED";
+	// 	};
+	// 	led_2: led_2 {
+	// 		gpios = <&psgpio_bank0 19 GPIO_ACTIVE_HIGH>;
+	// 		label = "USR2 LED";
+	// 	};
+	// 	led_3: led_3 {
+	// 		gpios = <&psgpio_bank0 20 GPIO_ACTIVE_HIGH>;
+	// 		label = "USR3 LED";
+	// 	};
+	// };
+
+	aliases {
+		led0 = &led_0;
+		led1 = &led_1;
+		led2 = &led_2;
+		led3 = &led_3;
+	};
+};
+
+&uart1 {
+	status = "okay";
+	current-speed = <115200>;
+	clock-frequency = <99999901>;
+};
+
+&ttc0 {
+	status = "okay";
+	clock-frequency = <5000000>;
+};
+
+// &psgpio {
+// 	status = "okay";
+// };
