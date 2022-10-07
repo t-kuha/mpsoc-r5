@@ -30,7 +30,7 @@ $ cd ..
 ```shell-session
 # Set environment variable to find the generated platform
 $ export PLATFORM_REPO_PATHS=$(dirname $(pwd))/platform/_pfm/u96v2_r5/export/u96v2_r5
-$ xsct create_app.tcl
+$ xsct create_testing.tcl
 ```
 
 - BOOT.BIN will be generated in ``_vitis_tflm_testing/tflm_testing_system/Release/sd_card``
