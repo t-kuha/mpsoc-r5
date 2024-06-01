@@ -9,7 +9,7 @@ $ vivado -mode batch -source create_xsa.tcl
 ## Generate Platform
 
 ```shell-session
-$ xsct create_platform.tcl
+$ vitis -s create_platform.py
 ```
 
 - Platform files will be in ``_pfm/u96v2_r5/export/u96v2_r5/``
