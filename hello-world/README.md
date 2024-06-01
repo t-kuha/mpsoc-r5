@@ -7,18 +7,17 @@
 ## Build SW (generate BOOT.BIN)
 
 ```shell-session
-# Set environment variable to find the generated platform
-$ export PLATFORM_REPO_PATHS=$(dirname $(pwd))/platform/_pfm/u96v2_r5/export/u96v2_r5
-$ xsct create_app.tcl
+$ vitis -s create_platform.py
+$ bootgen -image ./hello-world.bif -arch zynqmp -o BOOT.bin -w on
 ```
 
 ## Run
 
-- Copy ``_vitis/hello_world_system/Release/sd_card/BOOT.BIN`` into micro SD card & boot the board
+- Copy ``BOOT.BIN`` into micro SD card & boot the board
 
 ```shell-session
-Xilinx Zynq MP First Stage Boot Loader 
-Release 2020.2   Jan 23 2021  -  08:48:22
+Release 2024.1   Jun  1 2024  -  02:45:09
 PMU-FW is not running, certain applications may not be supported.
 Hello World
+Successfully ran Hello World application
 ```
