@@ -28,3 +28,5 @@ comp = client.create_app_component(
 )
 
 comp.build()
+
+vitis.dispose()

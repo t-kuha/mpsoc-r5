@@ -7,7 +7,7 @@
 ## Build SW (generate BOOT.BIN)
 
 ```shell-session
-$ vitis -s create_platform.py
+$ vitis -s create_app.py
 $ bootgen -image ./hello-world.bif -arch zynqmp -o BOOT.bin -w on
 ```
 
