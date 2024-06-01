@@ -1,0 +1,6 @@
+//arch = zynqmp; split = false; format = BIN
+the_ROM_image:
+{
+	[bootloader, destination_cpu = r5-0]../platform/_pfm/u96v2_r5/export/u96v2_r5/sw/boot/fsbl.elf
+	[destination_cpu = r5-0, exception_level = el-3]_vitis/tflm_testing/build/tflm_testing.elf
+}
