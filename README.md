@@ -1,8 +1,8 @@
 # mpsoc-r5: Zynq Ultrascale+ MPSoC RPU examples
 
 - Board: AVNET Ultra96v2
-- Toolchain: 2022.1
-- OS: Ubuntu 20.04
+- Toolchain: 2024.1
+- OS: Ubuntu 22.04
 
 ***
 
