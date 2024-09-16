@@ -13,3 +13,5 @@
 - __hello-world__: Output "Hello World" to console
 
 - __tf_micro__: TensorFlow Lite for Microcontrollers on RPU (Cortex-R5)
+
+- __zephyr__: zephyr RTOS (hello world)
