@@ -2,6 +2,8 @@
 *.log
 *.jou
 *.xsa
+BOOT.bin
+BOOT.BIN
 
 _*
 
