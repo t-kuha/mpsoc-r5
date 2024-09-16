@@ -19,11 +19,11 @@ $ git clone https://github.com/tensorflow/tflite-micro.git
 $ pushd tflite-micro
 
 # start build
-$ make -j$(nproc) -f ./tensorflow/lite/micro/tools/make/Makefile TARGET_ARCH=armv7r TARGET_TOOLCHAIN_PREFIX=armr5-none-eabi- COMMON_FLAGS="-mcpu=cortex-r5 -mfloat-abi=hard -c -mfpu=vfpv3-d16 -std=c++14"
+$ make -j$(nproc) -f ./tensorflow/lite/micro/tools/make/Makefile TARGET_ARCH=armv7r TARGET_TOOLCHAIN_PREFIX=armr5-none-eabi- COMMON_FLAGS="-mcpu=cortex-r5 -mfloat-abi=hard -c -mfpu=vfpv3-d16 -std=c++14" BUILD_TYPE=release
 $ popd
 ```
 
-- Output static library can be found as ``tflite-micro/gen/linux_armv7r_default_gcc/lib/libtensorflow-microlite.a``
+- Output static library can be found as ``tflite-micro/gen/linux_armv7r_release_gcc/lib/libtensorflow-microlite.a``
 
 ## Build testing app (generate BOOT.BIN)
 
