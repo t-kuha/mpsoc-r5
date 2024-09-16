@@ -13,3 +13,6 @@ tf_micro/tflite-micro
 *.url
 *.tar.gz
 *.zip
+
+zephyr/zephyr-sdk-*
+zephyr/zephyrproject
