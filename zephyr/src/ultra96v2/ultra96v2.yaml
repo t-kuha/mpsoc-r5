@@ -5,6 +5,10 @@ type: mcu
 arch: arm
 toolchain:
   - zephyr
-  - gnuarmemb
 supported:
   - shell
+testing:
+  ignore_tags:
+    - net
+    - bluetooth
+vendor: xlnx

@@ -3,8 +3,8 @@
 
 if BOARD_ULTRA96V2
 
-config BOARD
-	default "ultra96v2"
+#config BOARD
+#	default "ultra96v2"
 
 config FLASH_SIZE
 	int

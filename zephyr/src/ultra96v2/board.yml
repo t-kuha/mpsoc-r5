@@ -1,0 +1,5 @@
+board:
+  name: ultra96v2
+  vendor: amd
+  socs:
+  - name: zynqmp_rpu
