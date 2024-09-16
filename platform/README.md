@@ -3,7 +3,7 @@
 ## Create HW
 
 ```shell-session
-$ vivado -mode batch -source create_xsa.tcl
+$ vivado -notrace -nojournal -mode batch -source create_xsa.tcl
 ```
 
 ## Generate Platform
