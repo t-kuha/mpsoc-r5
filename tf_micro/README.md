@@ -1,14 +1,10 @@
-# TensorFlow for micro (MNIST digit classification) controllers on RPU
+# TensorFlow Lite for micro controllers on RPU
 
 - Make sure to build platform by following this [README.md](../platform/README.md)
 
-- TensorFlow Version: v2.4.1
-
 ***
 
-## Create application
-
-### Preparation
+## Preparation
 
 ```shell-session
 # set up toolchain
@@ -21,16 +17,17 @@ $ git checkout 8f9a923ad306a2d298c5086b57ec9b6caca76dfd
 $ popd
 ```
 
-### Build TensorFlow micro static library
+## Build TFLite Micro static library
 
 ```shell-session
-# start building static library
 # release build will emit error on MicroPrintf()
-$ make -j$(nproc) -f ./tensorflow/lite/micro/tools/make/Makefile TARGET_ARCH=armv7r TARGET_TOOLCHAIN_PREFIX=armr5-none-eabi- COMMON_FLAGS="-mcpu=cortex-r5 -mfloat-abi=hard -c -mfpu=vfpv3-d16 -std=c++14" BUILD_TYPE=release
+$ make -j$(nproc) -f ./tensorflow/lite/micro/tools/make/Makefile TARGET_ARCH=armv7r TARGET_TOOLCHAIN_PREFIX=armr5-none-eabi- ADDITIONAL_DEFINES="-mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16" BUILD_TYPE=release_with_logs
 $ popd
 ```
 
-- Output static library can be found as ``tflite-micro/gen/linux_armv7r_release_gcc/lib/libtensorflow-microlite.a``
+- Output static library can be found as ``tflite-micro/gen/linux_armv7r_release_with_logs_gcc/lib/libtensorflow-microlite.a``
+
+## Build application - MNIST inference
 
 - Generate BOOT.bin
 
@@ -39,17 +36,33 @@ $ vitis -s create_mnist_app.py
 $ bootgen -image tf_micro.bif -arch zynqmp -o BOOT.bin -w on
 ```
 
-***
-
-## TFLite micro testing app
-
-- Build TFLite micro static library
+- Copy the generated BOOB.bin into a micro SD card & boot up the board
 
 ```shell-session
-# release build will emit error on MicroPrintf()
-$ make -j$(nproc) -f ./tensorflow/lite/micro/tools/make/Makefile TARGET_ARCH=armv7r TARGET_TOOLCHAIN_PREFIX=armr5-none-eabi- COMMON_FLAGS="-mcpu=cortex-r5 -mfloat-abi=hard -c -mfpu=vfpv3-d16 -std=c++14" BUILD_TYPE=release_with_logs
-$ popd
+Zynq MP First Stage Boot Loader 
+Release 2024.1   Sep 16 2024  -  10:24:25
+PMU-FW is not running, certain applications may not be supported.
+..... TensorFlow Lite for Micro Controllers ...
+[INFO] Input size: 1 x 28 x 28 x 1
+[INFO] Quantization param:
+    type:       1
+    scale:      0.00392157
+    zero point: -128
+Score[0]: -128
+Score[1]: -128
+Score[2]: -128
+Score[3]: -128
+Score[4]: -128
+Score[5]: -128
+Score[6]: -128
+Score[7]: 127
+Score[8]: -128
+Score[9]: -128
+Output: 7
+..... DONE .....
 ```
+
+## Build application - TFLite micro testing app
 
 - Generate BOOT.bin
 
@@ -58,8 +71,7 @@ $ vitis -s create_testing_app.py
 $ bootgen -image tf_micro.bif -arch zynqmp -o BOOT.bin -w on
 ```
 
-- Run:
-  - Copy the generated BOOB.bin into a micro SD card & boot up the board
+- Copy the generated BOOB.bin into a micro SD card & boot up the board
 
 ```shell-session
 Zynq MP First Stage Boot Loader 
