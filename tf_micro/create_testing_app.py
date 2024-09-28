@@ -5,7 +5,6 @@ import os
 import shutil
 import vitis
 
-
 PFM_NAME='u96v2_r5'
 TOP_DIR=os.path.dirname(os.path.abspath(__file__))
 PFM_PATH=os.path.join(
@@ -29,27 +28,20 @@ comp = client.create_app_component(
 )
 
 # copy source files
-if True:
-    # MNIST example
-    SRC_NAMES = ['main.cc', 'model_quant.cc', 'model_quant.h', 'data.h']
-    for src_name in SRC_NAMES:
-        shutil.copy(
-            os.path.join(TOP_DIR, 'src', src_name),
-            os.path.join(WORKSPACE, 'tflm_testing', 'src', src_name)
-        )
-else:
-    # testing app
-    SRC_NAMES = ['micro_test.h', 'test_conv_model.cc', 'test_conv_model.h', 'util_test.cc']
-    for src_name in SRC_NAMES:
-        shutil.copy(
-            os.path.join(TFLM_REPO_PATH, 'tensorflow', 'lite', 'micro', 'testing', src_name),
-            os.path.join(WORKSPACE, 'tflm_testing', 'src', src_name)
-        )
+SRC_NAMES = ['micro_test.h', 'test_conv_model.cc', 'test_conv_model.h', 'util_test.cc']
+for src_name in SRC_NAMES:
+    shutil.copy(
+        os.path.join(TFLM_REPO_PATH, 'tensorflow', 'lite', 'micro', 'testing', src_name),
+        os.path.join(WORKSPACE, 'tflm_testing', 'src', src_name)
+    )
+comp.set_app_config(
+    key='USER_LINK_DIRECTORIES',
+    values=[os.path.join(TFLM_REPO_PATH, 'gen', 'linux_armv7r_release_with_logs_gcc', 'lib')]
+)
 
-status = comp.set_app_config(key='USER_COMPILE_DEFINITIONS', values=['TF_LITE_STATIC_MEMORY'])
-status = comp.set_app_config(key='USER_LINK_LIBRARIES', values=['m', 'tensorflow-microlite',])
-status = comp.set_app_config(key='USER_LINK_DIRECTORIES', values=[os.path.join(TFLM_REPO_PATH, 'gen', 'linux_armv7r_release_gcc', 'lib')])
-status = comp.set_app_config(
+comp.set_app_config(key='USER_COMPILE_DEFINITIONS', values=['TF_LITE_STATIC_MEMORY'])
+comp.set_app_config(key='USER_LINK_LIBRARIES', values=['m', 'tensorflow-microlite',])
+comp.set_app_config(
     key='USER_INCLUDE_DIRECTORIES',
     values=[
         TFLM_REPO_PATH,
