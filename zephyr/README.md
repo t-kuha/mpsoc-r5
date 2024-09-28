@@ -30,20 +30,31 @@ $ west init ./zephyrproject
 $ pushd ./zephyrproject
 $ west update
 $ popd
+
+# copy Ultra96 V2 board files
+$ cp -R src/ultra96v2/ zephyrproject/zephyr/boards/amd
 ```
 
 ## Build
 
-```shell-session
-# copy Ultra96 V2 board files
-$ cp -R src/ultra96v2/ zephyrproject/zephyr/boards/amd
+- Hello world app:
 
+```shell-session
 # create application .elf
 $ pushd zephyrproject/zephyr
 $ west build -p always -b ultra96v2 samples/hello_world
 $ popd
 
 # generate BOOT.BIN
+$ make -f src/makefile
+```
+
+- LED blink app:
+
+```shell-session
+$ pushd zephyrproject/zephyr
+$ west build -p always -b ultra96v2 samples/basic/blinky
+$ popd
 $ make -f src/makefile
 ```
 
